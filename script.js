@@ -1,10 +1,26 @@
 // Base URL of your backend on Render
 const API = "https://backend-123-ecor.onrender.com";
 
+// ---------------- LOGIN ----------------
+function login() {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email.endsWith('@kletech.ac.in')) {
+    return alert('Email must end with @kletech.ac.in');
+  }
+  localStorage.setItem('userEmail', email);
+  window.location.href = 'home.html';
+}
+
+// ---------------- NAVIGATION ----------------
+function goToWrite() { window.location.href = 'write.html'; }
+function goToView() { window.location.href = 'view.html'; }
+function goToHome() { window.location.href = 'home.html'; }
+
 // ---------------- BLOG MANAGEMENT ----------------
 const blogList = document.getElementById('blogList');
 const addBtn = document.getElementById('addBtn');
 
+// Initialize
 if (addBtn) {
   addBtn.addEventListener('click', addBlog);
   fetchBlogs();
@@ -16,7 +32,9 @@ if (addBtn) {
 async function fetchBlogs() {
   try {
     const res = await fetch(`${API}/blogs`);
+    if (!res.ok) throw new Error('Failed to fetch blogs');
     const blogs = await res.json();
+
     if (!blogList) return;
     blogList.innerHTML = '';
 
@@ -34,6 +52,7 @@ async function fetchBlogs() {
     });
   } catch (err) {
     console.error('Error fetching blogs:', err);
+    alert('Failed to load blogs');
   }
 }
 
@@ -42,8 +61,10 @@ async function addBlog() {
   const title = document.getElementById('title').value.trim();
   const content = document.getElementById('content').value.trim();
   const author = document.getElementById('author').value.trim();
-  
-  if (!title || !content || !author) return alert('All fields required');
+
+  if (!title || !content || !author) {
+    return alert('All fields are required');
+  }
 
   try {
     const res = await fetch(`${API}/blogs`, {
@@ -53,9 +74,9 @@ async function addBlog() {
     });
 
     const data = await res.json();
-    if (!res.ok) return alert(data.message);
+    if (!res.ok) return alert(data.message || 'Failed to add blog');
 
-    // Clear fields after adding
+    // Clear inputs
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('author').value = '';
@@ -63,6 +84,7 @@ async function addBlog() {
     fetchBlogs();
   } catch (err) {
     console.error('Error adding blog:', err);
+    alert('Failed to add blog');
   }
 }
 
@@ -73,10 +95,11 @@ async function deleteBlog(id) {
   try {
     const res = await fetch(`${API}/blogs/${id}`, { method: 'DELETE' });
     const data = await res.json();
-    if (!res.ok) return alert(data.message);
+    if (!res.ok) return alert(data.message || 'Failed to delete blog');
 
     fetchBlogs();
   } catch (err) {
     console.error('Error deleting blog:', err);
+    alert('Failed to delete blog');
   }
 }
