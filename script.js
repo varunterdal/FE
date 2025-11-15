@@ -1,5 +1,5 @@
 // Base URL of your backend on Render (no trailing slash)
-const API = "https://backend-123-ecor.onrender.com";
+const API = "https://backend-kdsh.onrender.com";
 
 // ---------------- LOGIN ----------------
 function login() {
@@ -45,7 +45,7 @@ async function fetchBlogs() {
         <p>${blog.content}</p>
         <small>${blog.author} | ${new Date(blog.date).toLocaleString()}</small>
         <br>
-        <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+        <button class="delete-btn" onclick="deleteBlog('${blog._id}')">Delete</button>
       `;
       blogList.appendChild(div);
     });
