@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - High-Class Blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Welcome</h1>
+  <h2>Choose an Option</h2>
+  <button class="nav-btn" onclick="goToWrite()">Write Blog</button>
+  <button class="nav-btn" onclick="goToView()">View Blogs</button>
+  <!-- Logout button -->
+  <button class="nav-btn" style="margin-top:20px; background-color:#ff5555;" onclick="logout()">Logout</button>
+</div>
+
+<script>
+function goToWrite() {
+  // navigate to Write Blog page
+  window.location.href = "write.html"; 
+}
+
+function goToView() {
+  // navigate to View Blog page
+  window.location.href = "view.html"; 
+}
+
+function logout() {
+  // go back to login page
+  window.location.href = "login.html";
+}
+</script>
+</body>
+</html>

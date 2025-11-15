@@ -1,0 +1,153 @@
+/* ===== Body & Background ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #dcdcdc; /* soft off-white for readability */
+  background-color: #111111; /* deep calm dark background */
+  background-image: radial-gradient(circle at top left, #1a1a1a 0%, #111111 100%);
+  overflow-x: hidden;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  background-color: rgba(20,20,20,0.95); /* subtle semi-transparent dark overlay */
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7); /* slightly stronger shadow for focus */
+}
+
+/* ===== Headings ===== */
+h1, h2 {
+  text-align: center;
+  color: #4caf50; /* keep green accent */
+  margin-bottom: 20px;
+}
+
+/* ===== Inputs & Textarea ===== */
+input, textarea {
+  width: 6cm;
+  max-width: 100%;
+  padding: 12px;
+  margin: 12px auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #444; /* softer border for calmness */
+  background-color: #1c1c1c; /* slightly lighter than container */
+  color: #dcdcdc; /* soft readable text */
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4caf50; /* green accent focus */
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/* ===== Buttons ===== */
+button {
+  width: 6cm;
+  max-width: 100%;
+  padding: 12px;
+  margin: 12px auto;
+  display: block;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50; /* green accent */
+  color: #121212; /* dark text for contrast */
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #388e3c; /* darker green hover */
+}
+
+/* ===== Home Page Navigation ===== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.nav-btn {
+  width: 6cm;
+  max-width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  background-color: #4caf50; /* green accent */
+  color: #121212;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #388e3c;
+}
+
+/* ===== Blog Cards ===== */
+.blog {
+  background-color: rgba(28,28,28,0.95); /* slightly lighter dark for separation */
+  padding: 22px;
+  margin: 18px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.2s;
+}
+
+.blog:hover {
+  transform: translateY(-3px);
+}
+
+.blog h2 {
+  margin: 0 0 10px 0;
+  color: #4caf50; /* green accent */
+  font-size: 20px;
+}
+
+.blog p {
+  color: #dcdcdc; /* soft readable text */
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.blog small {
+  color: #b0b0b0; /* calm grey for secondary info */
+  font-size: 13px;
+}
+
+.blog button.delete-btn {
+  background-color: #9ccc65; /* green variant for delete */
+  margin-top: 12px;
+}
+
+.blog button.delete-btn:hover {
+  background-color: #7cb342;
+}
+
+/* ===== Empty Blog Message ===== */
+#blogList:empty::before {
+  content: "No blogs yet. Start writing something amazing!";
+  display: block;
+  text-align: center;
+  color: #aaa; /* soft grey */
+  font-style: italic;
+  padding: 20px;
+  font-size: 16px;
+}
+
+/* ===== Hidden ===== */
+.hidden { display: none; }
