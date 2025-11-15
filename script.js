@@ -1,21 +1,6 @@
 // Base URL of your backend on Render
 const API = "https://backend-123-ecor.onrender.com";
 
-// ---------------- LOGIN ----------------
-function login() {
-  const email = document.getElementById('loginEmail').value.trim();
-  if (!email.endsWith('@kletech.ac.in')) return alert('Email must end with @kletech.ac.in');
-  
-  // Store login email locally
-  localStorage.setItem('userEmail', email);
-  window.location.href = 'home.html';
-}
-
-// ---------------- NAVIGATION ----------------
-function goToWrite() { window.location.href = 'write.html'; }
-function goToView() { window.location.href = 'view.html'; }
-function goToHome() { window.location.href = 'home.html'; }
-
 // ---------------- BLOG MANAGEMENT ----------------
 const blogList = document.getElementById('blogList');
 const addBtn = document.getElementById('addBtn');
@@ -32,7 +17,6 @@ async function fetchBlogs() {
   try {
     const res = await fetch(`${API}/blogs`);
     const blogs = await res.json();
-
     if (!blogList) return;
     blogList.innerHTML = '';
 
@@ -67,10 +51,11 @@ async function addBlog() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, content, author })
     });
-    
+
     const data = await res.json();
     if (!res.ok) return alert(data.message);
 
+    // Clear fields after adding
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('author').value = '';
