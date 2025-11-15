@@ -1,10 +1,14 @@
-// Base URL of your backend on Render
+// Base URL of your backend on Render (no trailing slash)
 const API = "https://backend-123-ecor.onrender.com";
 
 // ---------------- LOGIN ----------------
 function login() {
   const email = document.getElementById('loginEmail').value.trim();
-  if (!email.endsWith('@kletech.ac.in')) return alert('Email must end with @kletech.ac.in');
+
+  if (!email.endsWith('@kletech.ac.in')) {
+    return alert('Email must end with @kletech.ac.in');
+  }
+
   localStorage.setItem('userEmail', email);
   window.location.href = 'home.html';
 }
@@ -12,7 +16,7 @@ function login() {
 // ---------------- NAVIGATION ----------------
 function goToWrite() { window.location.href = 'write.html'; }
 function goToView() { window.location.href = 'view.html'; }
-function goToHome() { window.location.href = 'home.html'; }
+function goToHome()  { window.location.href = 'home.html'; }
 
 // ---------------- BLOG MANAGEMENT ----------------
 const blogList = document.getElementById('blogList');
@@ -29,7 +33,9 @@ async function fetchBlogs() {
   try {
     const res = await fetch(`${API}/blogs`);
     const blogs = await res.json();
+
     if (!blogList) return;
+
     blogList.innerHTML = '';
     blogs.forEach(blog => {
       const div = document.createElement('div');
@@ -52,7 +58,10 @@ async function addBlog() {
   const title = document.getElementById('title').value.trim();
   const content = document.getElementById('content').value.trim();
   const author = document.getElementById('author').value.trim();
-  if (!title || !content || !author) return alert('All fields required');
+
+  if (!title || !content || !author) {
+    return alert('All fields required');
+  }
 
   try {
     await fetch(`${API}/blogs`, {
@@ -64,6 +73,7 @@ async function addBlog() {
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('author').value = '';
+
     fetchBlogs();
   } catch (err) {
     console.error('Error adding blog:', err);
