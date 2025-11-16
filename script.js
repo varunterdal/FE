@@ -28,14 +28,15 @@ if (addBtn) {
   fetchBlogs();
 }
 
-// Fetch all blogs
+// ---------------- FETCH ALL BLOGS ----------------
 async function fetchBlogs() {
   try {
     const res = await fetch(`${API}/blogs`);
     if (!res.ok) throw new Error('Failed to fetch blogs');
-    const blogs = await res.json();
 
+    const blogs = await res.json();
     if (!blogList) return;
+
     blogList.innerHTML = '';
 
     blogs.forEach(blog => {
@@ -56,15 +57,13 @@ async function fetchBlogs() {
   }
 }
 
-// Add a new blog
+// ---------------- ADD BLOG ----------------
 async function addBlog() {
   const title = document.getElementById('title').value.trim();
   const content = document.getElementById('content').value.trim();
   const author = document.getElementById('author').value.trim();
 
-  if (!title || !content || !author) {
-    return alert('All fields are required');
-  }
+  if (!title || !content || !author) return alert('All fields are required');
 
   try {
     const res = await fetch(`${API}/blogs`, {
@@ -74,33 +73,44 @@ async function addBlog() {
     });
 
     const data = await res.json();
-    if (!res.ok) return alert(data.message || 'Failed to add blog');
 
-    // Clear inputs
+    // Important: check both res.ok and response content
+    if (!res.ok) {
+      console.error("Backend error:", data);
+      return alert(data.message || 'Failed to add blog');
+    }
+
+    // Clear form fields after successful add
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('author').value = '';
 
+    // Refresh the blog list immediately
     fetchBlogs();
+
   } catch (err) {
     console.error('Error adding blog:', err);
-    alert('Failed to add blog');
+    alert('Failed to add blog. Check console for details.');
   }
 }
 
-// Delete a blog
+// ---------------- DELETE BLOG ----------------
 async function deleteBlog(id) {
   if (!confirm('Are you sure you want to delete this blog?')) return;
 
   try {
     const res = await fetch(`${API}/blogs/${id}`, { method: 'DELETE' });
     const data = await res.json();
-    if (!res.ok) return alert(data.message || 'Failed to delete blog');
 
+    if (!res.ok) {
+      console.error("Backend error:", data);
+      return alert(data.message || 'Failed to delete blog');
+    }
+
+    // Refresh blogs after deletion
     fetchBlogs();
   } catch (err) {
     console.error('Error deleting blog:', err);
     alert('Failed to delete blog');
   }
 }
-
