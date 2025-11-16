@@ -1,5 +1,5 @@
 // Base URL of your backend on Render
-const API = "https://backend-123-ecor.onrender.com";
+const API = "https://backend-kdsh.onrender.com";
 
 // ---------------- LOGIN ----------------
 function login() {
@@ -103,3 +103,4 @@ async function deleteBlog(id) {
     alert('Failed to delete blog');
   }
 }
+
